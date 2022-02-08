@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <title>To Do Task</title>
+</head>
+
+<body>
+  <div class="jumbotron">
+    <h1 class="display-4">Hello!</h1>
+    <p class="lead">Welcome to your online task management system.</p>
+    <span id="date-display" style="background-color: #2ecc71;text-align:center;color:whitesmoke"></span>
+   
+    <hr class="my-4">
+    <p>You can organize your daily tasks in this page.</p>
+    <p class="lead">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnew">
+        + Add New Task
+      </button>
+    </p>
+<!-- Modal for adding new task -->
+<div class="modal fade" id="addnew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add a new task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <span id="date-display" style="background-color: #2ecc71;text-align:center;color:whitesmoke"></span>
+      <div class="d-flex justify-content-center my-5">
+        <div>
+          <div class="row">
+            <h1>Your new task</h1>
+          </div>
+          <div class="row mb-5">
+            <div class="col">
+              <form id="add-new-task">
+                <div class="row mb-4">
+                  <div class="col">
+                    <label for="new-task-name" class="p-0">Task Name:</label>
+                    <input type="text" class="form-control" id="new-task-name" required/>
+                    <div class="valid-feedback">Well done!</div>
+                    <div class="invalid-feedback">
+                      Please provide a valid name.
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="col">
+                    <label for="new-task-description" class="p-0">Description:</label>
+                    <input type="text" class="form-control" id="new-task-description" required/>
+                    <div class="invalid-feedback">
+                      <div class="valid-feedback">Great work!</div>
+                      Please provide a valid description.
+                    </div>
+                  </div>
+                </div>
+                <div class="row g-2 mb-3 px-0">
+                  <div class="col">
+                    <label for="new-task-assigned-to" class="p-0">Assigned To:</label>
+                    <input type="text" class="form-control" id="new-task-assigned-to" required/>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">
+                      Please provide a valid name.
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="new-task-due-date">Due Date:</label>
+                    <input type="date" class="form-control" id="new-task-due-date"/>
+                    <div class="valid-feedback">That's good!</div>
+                    <div class="invalid-feedback">
+                      Please provide a valid date.
+                    </div>
+                  </div>
+                </div>
+                <div class="row g-2">
+                  <div class="col">
+                    <label for="new-task-status">Task Status:</label>
+                    <select class="form-control" id="new-task-status">
+                      <option slected>  </option>
+                      <option>Done</option>
+                      <option>Review</option>
+                      <option>In Progress</option>
+                      <option>To Do</option>
+                    </select>
+                    <div class="valid-feedback">All good!</div>
+                    <div class="invalid-feedback">
+                      Please select a task status.
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <button type="submit" class="btn btn-primary" id="new-task-submit">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- card display -->
+<!-- Empty Task List -->
+<div class="task-list-container">
+  <h3 >Tasks:</h3>
+  <div class="card w-75">
+    <ul class="list-group" id="task-list">    
+    </ul>
+  </div>
+</div>
+
+
+<!-- commented out Hardcoded task cards
+<div class="card w-75">
+  <div type="button" class="card-body" data-toggle="modal" data-target="#myModal1">
+    <h5 class="card-title">Task 1</h5>
+    <span class="badge badge-primary">To Do</span>
+
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+  </div>
+</div>
+<div class="card w-75">
+  <div type="button" class="card-body" data-toggle="modal" data-target="#myModal2">
+    <h5 class="card-title">Task 2</h5>
+    <span class="badge badge-primary">To Do</span>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+  </div>
+</div>
+<div class="card w-75">
+  <div type="button" class="card-body" data-toggle="modal" data-target="#myModal3">
+    <h5 class="card-title">Task 3</h5>
+    <span class="badge badge-success">Done</span>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+  </div>
+</div>
+<div class="card w-75">
+  <div type="button" class="card-body" data-toggle="modal" data-target="#myModal4">
+    <h5 class="card-title">Task 4</h5>
+    <span class="badge badge-success">Done</span>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+  </div>
+</div>
+<div class="card w-75">
+  <div type="button" class="card-body" data-toggle="modal" data-target="#myModal5">
+    <h5 class="card-title">Task 5</h5>
+    <span class="badge badge-secondary">In Progress</span>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+  </div>
+</div> -->
+
+
+<!-- Modal -->
+<div id="myModal1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Task 1 Description</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          <ul>
+            <li>Name:</li>
+            <li>Assigned to:</li>
+            <li>Description:</li>
+            <li>Status:</li>
+            <li>Due date:</li>
+          </ul>
+        </p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editform">
+          Edit
+        </button>
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+          data-target="#delete">Delete</button>
+      </div>
+      <div>
+        <div class="container">
+          <div id="delete" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Task 1</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">Are you sure you want to Delete?</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-warning btn-sm" data-bs-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-secondary btn-sm">No</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Task 2 Description</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          <ul>
+            <li>Name:</li>
+            <li>Assigned to:</li>
+            <li>Description:</li>
+            <li>Status:</li>
+            <li>Due date:</li>
+          </ul>
+        </p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editform">
+          Edit
+        </button>
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delete2">Delete</button>
+      </div>
+      <div>
+        <div class="container">
+          <div id="delete2" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Task 2</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">Are you sure you want to Delete?</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-warning btn-sm" data-bs-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-secondary btn-sm">No</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+
+      </div>
+      </div>
+<!-- Modal -->
+<div id="myModal3" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Task 3 Description</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          <ul>
+            <li>Name:</li>
+            <li>Assigned to:</li>
+            <li>Description:</li>
+            <li>Status:</li>
+            <li>Due date:</li>
+          </ul>
+        </p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editform">
+          Edit
+        </button>
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delete3">Delete</button>
+      </div>
+      <div>
+        <div class="container">
+          <div id="delete3" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Task 3</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">Are you sure you want to Delete?</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-warning btn-sm" data-bs-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-secondary btn-sm">No</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="myModal4" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Task 4 Description</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+        <ul>
+          <li>Name:</li>
+          <li>Assigned to:</li>
+          <li>Description:</li>
+          <li>Status:</li>
+          <li>Due date:</li>
+        </ul>
+        </p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editform">
+          Edit
+        </button>
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delete4">Delete</button>
+      </div>
+      <div>
+        <div class="container">
+          <div id="delete4" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Task 4</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">Are you sure you want to Delete?</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-warning btn-sm" data-bs-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-secondary btn-sm">No</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="myModal5" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Task 5 Description</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+        <ul>
+          <li>Name:</li>
+          <li>Assigned to:</li>
+          <li>Description:</li>
+          <li>Status:</li>
+          <li>Due date:</li>
+        </ul>
+        </p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editform">
+          Edit
+        </button>
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#delete5">Delete</button>
+      </div>
+      <div>
+        <div class="container">
+          <div id="delete5" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Task 3</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">Are you sure you want to Delete?</label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-warning btn-sm" data-bs-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-secondary btn-sm">No</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Modal for editing task -->
+<div class="modal fade" id="editform" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="name" class="form-control" id="name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+              <label for="description">Description:</label>
+              <textarea class="form-control" id="description" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="assigned">Assigned to:</label>
+              <input type="name" class="form-control" id="assigned">
+            </div>
+
+          <div class="form-group">
+              <label for="due">Due Date:</label>
+              <div class="md-form md-outline input-with-post-icon datepicker">
+                  <input placeholder="Select date" type="date" id="example" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label for="status">Task status</label>
+              <select class="form-control" id="status">
+                <option>TO DO</option>
+                <option>IN PROGRESS</option>
+                <option>REVIEW</option>
+                <option>DONE</option>
+              </select>
+            </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Reset</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+  </div>
+
+
+
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+    <script src="./js/taskManager.js"></script> <!--add index.js for form validation-->
+    <script src="./js/index.js"></script>
+  </body>
+</html>
